@@ -1,17 +1,22 @@
 @extends('layouts.admin.admin_layout')
 
 @section('body')
-<form action="/admin/users/store" method="POST">
+<form action="/admin/user/store" method="POST">
     @csrf
     <div class="space-y-12">
         @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
+        <div class="bg-red-100 border-t border-b border-red-500 text-red-700 px-4 py-3" role="alert">
+            <p class="font-bold">Error message</p>
+            @foreach ($errors->all() as $error)
+            <p class="text-sm"> {{ $error }}</p>
+            @endforeach
+        </div>
+        @endif
+        @if (session('error_message'))
+        <div class="bg-red-100 border-t border-b border-red-500 text-red-700 px-4 py-3" role="alert">
+            <p class="font-bold">Error message</p>
+            <p class="text-sm"> {{ session('error_message') }}</p>
+        </div>
         @endif
         <div class="border-b border-gray-900/10 pb-12">
             <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">

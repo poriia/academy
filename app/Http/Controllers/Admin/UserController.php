@@ -19,7 +19,6 @@ class UserController extends Controller
         return view('admin/users/index', compact('users', 'title'));
     }
 
-
     public function create()
     {
         return view('admin/users/create');
@@ -29,7 +28,7 @@ class UserController extends Controller
     {
         try {
             $user = User::create([
-                'first_names' => $request->first_name,
+                'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
                 'email' => $request->email,
                 'phone_number' => $request->phone_number,
@@ -40,29 +39,45 @@ class UserController extends Controller
                 throw new Exception('User can not create!');
             }
 
-            return redirect()->route('admin.users.index');
+            return redirect()->route('admin.user.index')->with('success_message', 'User created successful!');
         } catch (Exception $exception) {
-            return redirect()->route('admin.users.create');
+            return redirect()->route('admin.user.create')->with('error_message', 'User create failed!');
         }
     }
 
-    public function show(string $id)
+    public function show(User $user)
     {
-        //
+        return view('admin/users/show', compact('user'));
     }
 
-    public function edit(string $id)
+    public function edit(User $user)
     {
-        //
+        return view('admin/users/edit', compact('user'));
     }
 
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $user)
     {
-        //
+        try {
+            $user->first_name = $request->first_name;
+            $user->last_name = $request->last_name;
+            $user->email = $request->email;
+            $user->phone_number = $request->phone_number;
+            $user->save();
+
+            return redirect()->route('admin.user.index')->with('success_message', 'User Updated successful!');
+        } catch (Exception $exception) {
+            return redirect()->back()->with('error_message', 'User update failed!');
+        }
     }
 
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        //
+        try {
+            $user->delete();
+
+            return redirect()->route('admin.user.index')->with('success_message', 'User Deleted successful!');
+        } catch (Exception $exception) {
+            return redirect()->back()->with('error_message', 'User delete failed!');
+        }
     }
 }
