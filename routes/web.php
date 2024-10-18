@@ -1,11 +1,17 @@
 <?php
 
+use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\TicketController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return 'Academy is Health!';
 });
+
+Route::get('/admin/auth/login', [AuthController::class, 'login'])->name('admin.auth.login');
+Route::post('/admin/auth/logged-in', [AuthController::class, 'logged_in'])->name('admin.auth.logged-in');
+
 
 Route::get('/admin/user', [UserController::class, 'index'])->name('admin.user.index');
 
@@ -17,3 +23,10 @@ Route::get('/admin/user/{user}/edit', [UserController::class, 'edit'])->name('ad
 Route::post('/admin/user/update/{user}', [UserController::class, 'update'])->name('admin.user.update');
 
 Route::post('/admin/user/delete/{user}', [UserController::class, 'destroy'])->name('admin.user.delete');
+
+
+
+Route::get('/admin/ticket', [TicketController::class, 'index'])->name('admin.ticket.index');
+
+Route::get('/admin/ticket/create', [TicketController::class, 'create'])->name('admin.ticket.create');
+Route::post('/admin/ticket/store', [TicketController::class, 'store'])->name('admin.ticket.store');
