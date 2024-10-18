@@ -15,7 +15,11 @@
 @endif
 @foreach ($tickets as $ticket)
 <ul>
-    <li>id : {{$ticket->id}}</li>
+    <li>
+        <a href="{{route("admin.ticket.show",[$ticket->id])}}">
+            id : {{$ticket->id}}
+        </a>
+    </li>
     <li>user : {{$ticket->user->first_name}}</li>
     <li>first_name : {{$ticket->title}}</li>
     <li>last_name : {{$ticket->body}}</li>

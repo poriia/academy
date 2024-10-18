@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\TicketController;
+use App\Http\Controllers\Admin\TicketReplyController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,3 +31,6 @@ Route::get('/admin/ticket', [TicketController::class, 'index'])->name('admin.tic
 
 Route::get('/admin/ticket/create', [TicketController::class, 'create'])->name('admin.ticket.create');
 Route::post('/admin/ticket/store', [TicketController::class, 'store'])->name('admin.ticket.store');
+Route::get('/admin/ticket/{ticket}', [TicketController::class, 'show'])->name('admin.ticket.show');
+
+Route::post('/admin/reply/store', [TicketReplyController::class, 'store'])->name('admin.reply.store');

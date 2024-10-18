@@ -3,17 +3,17 @@
 namespace App\Models;
 
 use App\Enum\TicketStatusEnum;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Ticket extends Model
+class TicketReply extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'user_id',
+        'ticket_id',
         'title',
         'body',
         'status',
@@ -31,9 +31,8 @@ class Ticket extends Model
         return $this->belongsTo(User::class);
     }
 
-
-    public function replies(): HasMany
+    public function ticket(): BelongsTo
     {
-        return $this->HasMany(TicketReply::class);
+        return $this->belongsTo(Ticket::class);
     }
 }

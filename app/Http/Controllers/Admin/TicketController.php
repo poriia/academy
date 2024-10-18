@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Enum\TicketStatusEnum;
 use Exception;
 use App\Models\Ticket;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTicketRequest;
 
 class TicketController extends Controller
 {
+
+    
     public function index()
     {
         $tickets = Ticket::all();
@@ -45,10 +45,10 @@ class TicketController extends Controller
         }
     }
 
-    // public function show(User $user)
-    // {
-    //     return view('admin/users/show', compact('user'));
-    // }
+    public function show(Ticket $ticket)
+    {
+        return view('admin/tickets/show', compact('ticket'));
+    }
 
     // public function edit(User $user)
     // {
