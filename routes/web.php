@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\TicketController;
 use App\Http\Controllers\Admin\TicketReplyController;
 use App\Http\Controllers\Admin\UserController;
@@ -21,7 +22,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/admin/user/{user}', [UserController::class, 'show'])->name('admin.user.show');
     Route::get('/admin/user/{user}/edit', [UserController::class, 'edit'])->name('admin.user.edit');
-    Route::post('/admin/user/update/{user}', [UserController::class, 'update'])->name('admin.user.update');
+    Route::post('/admin/user/{user}', [UserController::class, 'update'])->name('admin.user.update');
 
     Route::post('/admin/user/delete/{user}', [UserController::class, 'destroy'])->name('admin.user.delete');
 
@@ -33,4 +34,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/ticket/{ticket}', [TicketController::class, 'show'])->name('admin.ticket.show');
 
     Route::post('/admin/reply/store', [TicketReplyController::class, 'store'])->name('admin.reply.store');
+
+    Route::get('/admin/category', [CategoryController::class, 'index'])->name('admin.category.index');
+    Route::get('/admin/category/create', [CategoryController::class, 'create'])->name('admin.category.create');
+    Route::post('/admin/category/store', [CategoryController::class, 'store'])->name('admin.category.store');
+    Route::get('/admin/category/{category}', [CategoryController::class, 'show'])->name('admin.category.show');
 });
