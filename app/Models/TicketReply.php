@@ -19,6 +19,8 @@ class TicketReply extends Model
         'status',
     ];
 
+    protected $with = ['user'];
+
     protected function casts()
     {
         return [
