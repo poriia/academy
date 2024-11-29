@@ -1,17 +1,20 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthController;
-use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\TicketController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\TicketReplyController;
-use App\Http\Controllers\Admin\UserController;
-use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return 'Academy is Health!';
 });
 Route::prefix('/admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', DashboardController::class)->name('dashboard');
+
     Route::get('/auth/login', [AuthController::class, 'login'])->name('auth.login');
     Route::post('/auth/logged-in', [AuthController::class, 'logged_in'])->name('auth.logged-in');
 
